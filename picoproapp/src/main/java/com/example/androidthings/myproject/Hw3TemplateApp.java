@@ -66,9 +66,9 @@ public class Hw3TemplateApp extends SimplePicoPro {
 
         serialMidi.midi_controller_change(channel,timbre_controller, map(timbre, 0, 3.3, 0, 127));
 
-        serialMidi.midi_note_on(channel, map(frequency, background, 3.3, 0, 84), map(volume, 0, 3.3, 0, 127));
+        serialMidi.midi_note_on(channel, map(frequency*frequency, background*background, 3.3*3.3, 0, 84), map(volume, 0, 3.3, 0, 127));
         delay(20);
-        serialMidi.midi_note_off(channel, map(frequency, 0, 3.3, 0, 84), map(volume, 0, 3.3, 0, 127));
+        serialMidi.midi_note_off(channel, map(frequency*frequency, background*background, 3.3*3.3, 0, 84), map(volume, 0, 3.3, 0, 127));
         delay(20);
     }
 
