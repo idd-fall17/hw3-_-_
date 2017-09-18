@@ -33,6 +33,8 @@ The inputs needed by the hardware was determined in a group meeting before any f
 Then, we decided to use the photocell and potentiometers and one switch.
 After putting the input devices into the enclosure, it was soldered into place and the ribbon wire was attached as well.
 
+![Schematic-fritzing](https://raw.githubusercontent.com/idd-fall17/hw3-lmn/master/media/schematic-fritzing.png)
+_The schematic (using GPIOs for both analog and digital inputs on a Raspberry Pi 3 instead of Pico Pro model)_
 
 ### Software
 
