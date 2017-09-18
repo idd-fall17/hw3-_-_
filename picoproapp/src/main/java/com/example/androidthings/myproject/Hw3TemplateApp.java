@@ -31,7 +31,7 @@ import com.google.android.things.pio.Gpio;
 
 public class Hw3TemplateApp extends SimplePicoPro {
 
-    float volume, frequency, timbre,a3; //store analog readings from ADS1015 ADC here [units: V]
+    float volume, frequency, timbre; //store analog readings from ADS1015 ADC here [units: V]
 
     SerialMidi serialMidi;
     int channel = 0;
@@ -59,10 +59,9 @@ public class Hw3TemplateApp extends SimplePicoPro {
 
     public void loop() {
         // read all analog channels and print to UART
-        volume = analogRead(A0);
-        frequency = analogRead(A1);
+        frequency = analogRead(A0);
+        volume = analogRead(A1);
         timbre = analogRead(A2);
-        a3 = analogRead(A3);
 
         serialMidi.midi_controller_change(channel,timbre_controller, map(timbre, 0, 3.3, 0, 127));
 
@@ -70,6 +69,8 @@ public class Hw3TemplateApp extends SimplePicoPro {
         delay(20);
         serialMidi.midi_note_off(channel, map(frequency*frequency, background*background, 3.3*3.3, 0, 84), map(volume, 0, 3.3, 0, 127));
         delay(20);
+
+        println("freq: " + frequency + "\tvol: " + volume + "\ttimbre: " + timbre); // Android monitor
     }
 
     public int map(double x, double in_min, double in_max, double out_min, double out_max) {
@@ -80,6 +81,7 @@ public class Hw3TemplateApp extends SimplePicoPro {
     @Override
     void digitalEdgeEvent(Gpio pin, boolean value) {
         enabled = !enabled;
+        println("REC enabled=" + enabled);
 
         delay(100);
     }
