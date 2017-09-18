@@ -1,0 +1,3 @@
+[submodule "server/cat-synth"]
+	path = server/cat-synth
+	url = https://github.com/nguyensomniac/cat-synth

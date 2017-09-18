@@ -37,6 +37,7 @@ public class Hw3TemplateApp extends SimplePicoPro {
     int channel = 0;
     int velocity = 127; //0..127
     int timbre_value = 0;
+    int last_note = 0;
     final int timbre_controller = 0x47;
     boolean enabled = false;
     double background;
@@ -63,19 +64,26 @@ public class Hw3TemplateApp extends SimplePicoPro {
             frequency = analogRead(A0);
             volume = analogRead(A1);
             timbre = analogRead(A2);
+            int note = map(Math.pow(Math.min(frequency, 1.2), .25), 0.2, Math.pow(background, .25), 60, 72);
 
+            serialMidi.midi_note_on(channel, note, map(volume, 0, 3.3, 0, 127));
             serialMidi.midi_controller_change(channel, timbre_controller, map(timbre, 0, 3.3, 0, 127));
-
-            serialMidi.midi_note_on(channel, map(frequency * frequency, background * background, 3.3 * 3.3, 0, 84), map(volume, 0, 3.3, 0, 127));
-            delay(20);
-            serialMidi.midi_note_off(channel, map(frequency * frequency, background * background, 3.3 * 3.3, 0, 84), map(volume, 0, 3.3, 0, 127));
-            delay(20);
-
+            last_note = note;
             println("freq: " + frequency + "\tvol: " + volume + "\ttimbre: " + timbre); // Android monitor
+        } else if (last_note != 0) {
+            frequency = analogRead(A0);
+            serialMidi.midi_note_off(channel, last_note, map(volume, 0, 3.3, 0, 127));
+            last_note = 0;
         }
+        delay(100);
     }
 
-    public int map(double x, double in_min, double in_max, double out_min, double out_max) {
+    private double doubleMap(double x, double in_min, double in_max, double out_min, double out_max) {
+        Double d = ((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min);
+        return d;
+    }
+
+    private int map(double x, double in_min, double in_max, double out_min, double out_max) {
         Double d = ((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min);
         return d.intValue();
     }
@@ -84,7 +92,6 @@ public class Hw3TemplateApp extends SimplePicoPro {
     void digitalEdgeEvent(Gpio pin, boolean value) {
         enabled = !enabled;
         println("REC enabled=" + enabled);
-
         delay(100);
     }
 }
