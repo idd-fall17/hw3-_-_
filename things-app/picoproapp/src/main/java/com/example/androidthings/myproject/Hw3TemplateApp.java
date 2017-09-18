@@ -64,7 +64,9 @@ public class Hw3TemplateApp extends SimplePicoPro {
             frequency = analogRead(A0);
             volume = analogRead(A1);
             timbre = analogRead(A2);
-            int note = map(Math.pow(Math.min(frequency, 1.2), .25), 0.2, Math.pow(background, .25), 60, 72);
+            int noteIndex = map(Math.pow(Math.max(Math.min(frequency, 1.2), 0.2), .25), Math.pow(0.2, .25), Math.pow(1.2, .25), 0, 10);
+            int[] notes = {60, 62, 64, 67, 69, 72, 74, 76, 79, 81, 84};
+            int note = notes[noteIndex];
 
             serialMidi.midi_note_on(channel, note, map(volume, 0, 3.3, 0, 127));
             serialMidi.midi_controller_change(channel, timbre_controller, map(timbre, 0, 3.3, 0, 127));
@@ -78,13 +80,8 @@ public class Hw3TemplateApp extends SimplePicoPro {
         delay(100);
     }
 
-    private double doubleMap(double x, double in_min, double in_max, double out_min, double out_max) {
-        Double d = ((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min);
-        return d;
-    }
-
     private int map(double x, double in_min, double in_max, double out_min, double out_max) {
-        Double d = ((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min);
+        Double d = ((x - in_min) * (out_max - out_min) / (in_max - in_min)) + out_min;
         return d.intValue();
     }
 
