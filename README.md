@@ -8,7 +8,9 @@ _Top view of the instrument_
 ## Team members L-M-N
 
 Rachel Lee: Hardware
+
 Kartikye Mittal: Microcontroller programming
+
 Lily Nguyen: Sound synthesizer programming
 
 ## The control scheme
