@@ -2,6 +2,8 @@
 
 ## Demo and images
 
+[![Video demo](https://raw.githubusercontent.com/idd-fall17/hw3-lmn/master/media/demo-thumb.JPG) Watch video demo](https://youtu.be/CjBjLMEMnmk)
+
 ![Hardware top view](https://raw.githubusercontent.com/idd-fall17/hw3-lmn/master/media/hardware_top.jpg)
 _Top view of the instrument_
 
@@ -34,7 +36,9 @@ After putting the input devices into the enclosure, it was soldered into place a
 
 ### Software
 
-TODO
+We used a custom MIDI output written in Javascript. We read data from the serial port on a Node server, then stream that to a webpage using websockets. We then use that MIDI output to control an oscillator, using [timbre.js](https://github.com/mohayonao/timbre.js/).
+
+For an added audiovisual experience, we used THREE.js to render a cat on the screen, which changes size, position, and color depending on user input.
 
 ## Reflection
 
@@ -42,12 +46,20 @@ The hardware was not particularly hard to make.
 It used similar skills as making the keyboard text entry device.
 The software on the microcontroller was also straightforward with the sample code, sending MIDI encoded messages from 
 serial to USB.
-The sound synthesizer was the hardest to make.
+The sound synthesizer was the hardest to make. The biggest challenge we came across was playing a MIDI sound on the browser. There are many libraries that deal with MIDI, but most are old and unmaintained.
 We consider the creation of our pieces to be successful.
 
 However, we did face issues with scaling using the photocell. Most of the change of value (resistance) occurred when the hand was mostly right on top of the photocell. Ideally the movement of the hand would be linearly related to the pitch of the sound.
 
 # Using this codebase
+
+## Cloning the repo
+
+The webserver lives in a git submodule. If you want to get that code, run `git clone` with the `--recursive` flag:
+
+```
+git clone git@github.com:idd-fall17/hw3-lmn.git --recursive
+```
 
 ## Pre-requisites
 
