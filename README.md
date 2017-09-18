@@ -1,18 +1,56 @@
-Android Things empty project template
-=====================================
+# Photo-theremin
 
-Use this empty project as a template for your Android Things project.
+## Demo and images
+
+TODO
+
+## Team members L-M-N
+
+Rachel Lee: Hardware
+Kartikye Mittal: Microcontroller programming
+Lily Nguyen: Sound synthesizer programming
+
+## The control scheme
+
+The photo-theremin uses a photocell, two potentiometers, and one momentary switch as inputs.
+It is similar to a [theremin]() in that the left hand controls pitch by hover distance to the board (via blocking light out from the photocell).
+The right hand controls volume by turning a potentiometer knob (~200 degrees range).
+It can also turn another potentiometre knob for changing the timbre.
+The momentary switch REC enables or disables the midi serial data transfer. It is disabled on program start.
+By dextrously turning the volume knob and controlling pitch with the left hand, the user should be able to play a tune. 
+
+## Implementation
+
+### Hardware
+
+The enclosure is made out of 1/8" thick birch plywood cut by the laser cutter.
+The inputs needed by the hardware was determined in a group meeting before any fabrication.
+Then, we decided to use the photocell and potentiometers and one switch.
+After putting the input devices into the enclosure, it was soldered into place and the ribbon wire was attached as well.
 
 
-Pre-requisites
---------------
+### Software
+
+TODO
+
+## Reflection
+
+TODO
+Success?
+
+What went well?
+
+What was easy?
+
+# Using this codebase
+
+## Pre-requisites
 
 - Android Things compatible board
 - Android Studio 2.2+
 
 
-Build and install
-=================
+## Build and install
 
 On Android Studio, click on the "Run" button.
 
@@ -23,8 +61,7 @@ If you prefer to run on the command line, type
 adb shell am start com.example.androidthings.myproject/.MainActivity
 ```
 
-License
--------
+## License
 
 Copyright 2016 The Android Open Source Project, Inc.
 
